@@ -31,10 +31,10 @@ reg_write = {"enable" : 0x02, "Vout" : 0x0A, "slew rate" : 0x03, "delay" : 0x12}
 bus = smbus.SMBus(channel)
 
 # Enable and setup Buck
-bus.write_i2c_block_data(address, reg_write["enable"], [0xC4])
-bus.write_i2c_block_data(address, reg_write["slew rate"], [0x07])
-bus.write_i2c_block_data(address, reg_write["delay"], [0x0F])
-bus.write_i2c_block_data(address, reg_write["Vout"], [0x17])
+bus.write_i2c_block_data(address, reg_write["enable"], [0xC4]) # Enable BUCK0 with EN1 control and enabled discharge resistor
+bus.write_i2c_block_data(address, reg_write["slew rate"], [0x07]) # 0.47mV/us
+bus.write_i2c_block_data(address, reg_write["delay"], [0x0F]) # 15ms
+bus.write_i2c_block_data(address, reg_write["Vout"], [0x17]) # 0.73V
 
 try: 
 	scope.ask(":TIM:SCAL 0.5")
